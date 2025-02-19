@@ -6,35 +6,27 @@
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
+                <img src="{{ vehicle.image.url }}" alt="Car thumbnail" class="rounded cursor-pointer" />
                 <div>
-                    <img src="/api/placeholder/600/400" alt="Car" class="rounded-lg" />
-                    <div class="grid grid-cols-4 gap-2 mt-4">
-                        <img src="/api/placeholder/150/100" alt="Car thumbnail" class="rounded cursor-pointer" />
-                        <img src="/api/placeholder/150/100" alt="Car thumbnail" class="rounded cursor-pointer" />
-                        <img src="/api/placeholder/150/100" alt="Car thumbnail" class="rounded cursor-pointer" />
-                        <img src="/api/placeholder/150/100" alt="Car thumbnail" class="rounded cursor-pointer" />
-                    </div>
-                </div>
-                <div>
-                    <h1 class="text-3xl font-bold">2024 BMW 3 Series</h1>
+                    <h1 class="text-3xl font-bold">{{ vehicle.year }} {{ vehicle.brand }} {{ vehicle.model }} {{ vehicle.color }}</h1>
                     <p class="text-2xl text-blue-600 mt-2">$499/month</p>
                     <div class="mt-4 space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-gray-50 p-3 rounded">
-                                <div class="text-gray-600">Transmission</div>
-                                <div class="font-semibold">Automatic</div>
+                                <div class="text-gray-600">Type </div>
+                                <div class="font-semibold">{{ vehicle.vehicle_type }}</div>
                             </div>
                             <div class="bg-gray-50 p-3 rounded">
                                 <div class="text-gray-600">Engine</div>
-                                <div class="font-semibold">2.0L Turbo</div>
+                                <div class="font-semibold">{{ vehicle.engine_type }}</div>
                             </div>
                             <div class="bg-gray-50 p-3 rounded">
                                 <div class="text-gray-600">MPG</div>
-                                <div class="font-semibold">26 City / 36 Hwy</div>
+                                <div class="font-semibold">{{ vehicle.millage }}</div>
                             </div>
                             <div class="bg-gray-50 p-3 rounded">
                                 <div class="text-gray-600">Color</div>
-                                <div class="font-semibold">Alpine White</div>
+                                <div class="font-semibold">{{ vehicle.color }}</div>
                             </div>
                         </div>
                         <!-- This button toggles the checkout section -->
@@ -130,5 +122,5 @@
             </div>
         </div>
     </div>
-</div>
+</div >
 {% endblock %}
