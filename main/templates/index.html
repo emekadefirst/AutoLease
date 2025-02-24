@@ -1,48 +1,84 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <!-- Car Listing Page -->
 <div id="listPage" class="page bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <!-- Filters -->
-        <div class="bg-white p-4 rounded-lg shadow mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <select class="border rounded-md p-2">
-                    <option>Filter by transmisson type</option>
-                    {% for engine in engintype %}
-                    <option>{{ engine.name }}</option>
-                    {% endfor %}
-                </select>
-                <select class="border rounded-md p-2">
-                    <option>Filter by Vehicle Type</option>
-                    {% for vehicle_type in vehicletype %}
-                    <option>{{ vehicle_type.name }}</option>
-                    {% endfor %}
-                </select>
-                <button class="bg-blue-600 text-white rounded-md hover:bg-blue-700">Apply Filters</button>
-            </div>
-        </div>
-
-        <!-- Car Grid -->
-         {% for vehicle in vehicles%}
-        <a href="detail/{{ vehicle.id }}">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Car Card 1 -->
-            <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer">
-                <img src="{{ vehicle.image.url }}" alt="Car" class="w-full object-cover" />
-                <div class="p-4">
-                    <h3 class="text-xl font-semibold">{{ vehicle.year }} {{ vehicle.brand }} {{ vehicle.model }} {{ vehicle.color }} </h3>
-                    <div class="mt-2 flex justify-between text-sm text-gray-500">
-                        <span>Millage: {{ vehicle.millage }}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- More car cards... -->
-        </div>
-        </a>
-        {% endfor %}
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="flex items-center gap-2 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+        </svg>
+        <h2 class="text-lg font-semibold text-gray-800">Filter Vehicles</h2>
     </div>
+
+    <form method="GET" action="{% url 'filter' %}" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    Transmission Type
+                </label>
+                <select name="etype"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">All Types</option>
+                    {% for engine in engintype %}
+                    <option value="{{ engine.name }}">{{ engine.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    Vehicle Type
+                </label>
+                <select name="type"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">All Vehicles</option>
+                    {% for vehicle_type in vehicletype %}
+                    <option value="{{ vehicle_type.name }}">{{ vehicle_type.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex items-end space-x-2 md:col-span-2">
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                    Apply Filters
+                </button>
+                <a href="{% url 'Home page' %}">
+                <button type="reset"
+                    class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
+                    Reset
+                </button>
+                </a>
+            </div>
+        </div>
+    </form>
 </div>
 
+        <!-- Car Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {% for vehicle in vehicles %}
+            <a href="detail/{{ vehicle.id }}">
+                <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer">
+                    <img src="{{ vehicle.image.url }}" alt="Car" class="w-full object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">
+                            {{ vehicle.year }} {{ vehicle.brand }} {{ vehicle.model }} {{ vehicle.color }}
+                        </h3>
+                        <div class="mt-2 flex justify-between text-sm text-gray-500">
+                            <span>Mileage: {{ vehicle.millage }}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <p class="text-gray-500">No vehicles match your criteria.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
