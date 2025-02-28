@@ -81,7 +81,7 @@ class Lease(models.Model):
 
     def save(self, *args, **kwargs):
         try:
-            lease_price = LeasePrice.objects.get(vechicle=self.vechicle)
+            lease_price = LeasePrice. objects.get(vechicle=self.vechicle)
         except LeasePrice.DoesNotExist:
             raise ValidationError("No lease price set for this vehicle.")
 

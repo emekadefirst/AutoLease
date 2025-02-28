@@ -5,11 +5,116 @@
 <div class="bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Main content grid restructured for responsive layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
-                <img src="{{ vehicle.image.url }}" alt="Car thumbnail" class="rounded cursor-pointer" />
+                <!-- Left column - Car image and lease form on desktop -->
+                <div class="flex flex-col space-y-6">
+                    <!-- Car Image -->
+                    <img src="{{ vehicle.image.url }}" alt="Car thumbnail" class="rounded cursor-pointer w-full" />
+
+                    <!-- Lease Form - Shows below image on desktop, hidden on mobile -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hidden md:block">
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-4">Lease Information</h2>
+
+                            <form class="space-y-4">
+                                <!-- Vehicle Selection -->
+                                <div class="space-y-2">
+                                    <label for="vehicle" class="block text-sm font-medium text-gray-700">Vehicle</label>
+                                    <select id="vehicle" name="vehicle"
+                                        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md shadow-sm">
+                                        <option value="">{{ vehicle.year }} {{ vehicle.brand }} {{ vehicle.model }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Duration and Type (Side by Side) -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label for="duration"
+                                            class="block text-sm font-medium text-gray-700">Duration</label>
+                                        <input type="number" id="duration" name="duration" min="1"
+                                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <label for="duration_type"
+                                            class="block text-sm font-medium text-gray-700">Duration Type</label>
+                                        <select id="duration_type" name="duration_type"
+                                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md shadow-sm">
+                                            <option value="daily">Days</option>
+                                            <option value="weekly">Weeks</option>
+                                            <option value="monthly">Months</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Profile Image Upload -->
+                                <div class="space-y-2">
+                                    <label for="profile_image" class="block text-sm font-medium text-gray-700">Profile
+                                        Image</label>
+                                    <div class="mt-1 flex items-center">
+                                        <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                                            <svg class="h-full w-full text-gray-300" fill="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                        </span>
+                                        <input type="file" id="profile_image" name="profile_image"
+                                            class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    </div>
+                                </div>
+
+                                <!-- Phone Numbers -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label for="phone_number_1"
+                                            class="block text-sm font-medium text-gray-700">Primary Phone</label>
+                                        <input type="tel" id="phone_number_1" name="phone_number_1"
+                                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <label for="phone_number_2"
+                                            class="block text-sm font-medium text-gray-700">Secondary Phone</label>
+                                        <input type="tel" id="phone_number_2" name="phone_number_2"
+                                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                </div>
+
+                                <!-- Date Range -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label for="start_date" class="block text-sm font-medium text-gray-700">Start
+                                            Date</label>
+                                        <input type="date" id="start_date" name="start_date"
+                                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <label for="end_date" class="block text-sm font-medium text-gray-700">End
+                                            Date</label>
+                                        <input type="date" id="end_date" name="end_date"
+                                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="pt-4">
+                                    <button type="submit"
+                                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        Submit Lease Request
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column - Car details and pricing -->
                 <div>
                     <h1 class="text-3xl font-bold">{{ vehicle.year }} {{ vehicle.brand }} {{ vehicle.model }} {{ vehicle.color }}</h1>
-                    <p class="text-2xl text-blue-600 mt-2">$499/month</p>
                     <div class="mt-4 space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-gray-50 p-3 rounded">
@@ -29,98 +134,143 @@
                                 <div class="font-semibold">{{ vehicle.color }}</div>
                             </div>
                         </div>
-                        <!-- This button toggles the checkout section -->
-                        <button onclick="showPage('checkoutPage')"
-                            class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700">
-                            Proceed to Lease
-                        </button>
+                    </div>
+
+                    <!-- Lease Pricing -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden my-4">
+                        <div class="px-6 py-2">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-4">Lease Pricing</h2>
+                            <div class="grid grid-cols-1 gap-4">
+                                <!-- Price Sections -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <!-- Daily Price -->
+                                    <div class="bg-blue-50 p-4 rounded-lg">
+                                        <h3 class="text-sm font-medium text-gray-700">Daily Rate</h3>
+                                        <p class="text-2xl font-bold text-blue-600">₦<span id="dailyPrice">{{ lease.daily_price }}</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Per day</p>
+                                    </div>
+
+                                    <!-- Weekly Price -->
+                                    <div class="bg-green-50 p-4 rounded-lg">
+                                        <h3 class="text-sm font-medium text-gray-700">Weekly Rate</h3>
+                                        <p class="text-2xl font-bold text-green-600">₦<span id="weeklyPrice">{{ lease.weekly_price }}</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Per week</p>
+                                    </div>
+
+                                    <!-- Monthly Price -->
+                                    <div class="bg-purple-50 p-4 rounded-lg">
+                                        <h3 class="text-sm font-medium text-gray-700">Monthly Rate</h3>
+                                        <p class="text-2xl font-bold text-purple-600">₦<span id="monthlyPrice">{{ lease.monthly_price }}</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Per month</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile-only lease form - Shows below pricing on mobile, hidden on desktop -->
+            <div class="md:hidden px-6 pb-6">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Lease Information</h2>
+
+                        <form class="space-y-4">
+                            <!-- Vehicle Selection -->
+                            <div class="space-y-2">
+                                <label for="vehicle-mobile"
+                                    class="block text-sm font-medium text-gray-700">Vehicle</label>
+                                <select id="vehicle-mobile" name="vehicle"
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md shadow-sm">
+                                    <option value="">{{ vehicle.year }} {{ vehicle.brand }} {{ vehicle.model }}</option>
+                                </select>
+                            </div>
+
+                            <!-- Duration and Type -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label for="duration-mobile"
+                                        class="block text-sm font-medium text-gray-700">Duration</label>
+                                    <input type="number" id="duration-mobile" name="duration" min="1"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label for="duration_type-mobile"
+                                        class="block text-sm font-medium text-gray-700">Duration Type</label>
+                                    <select id="duration_type-mobile" name="duration_type"
+                                        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md shadow-sm">
+                                        <option value="daily">Days</option>
+                                        <option value="weekly">Weeks</option>
+                                        <option value="monthly">Months</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Profile Image Upload -->
+                            <div class="space-y-2">
+                                <label for="profile_image-mobile"
+                                    class="block text-sm font-medium text-gray-700">Profile Image</label>
+                                <div class="mt-1 flex items-center">
+                                    <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                                        <svg class="h-full w-full text-gray-300" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                    </span>
+                                    <input type="file" id="profile_image-mobile" name="profile_image"
+                                        class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                </div>
+                            </div>
+
+                            <!-- Phone Numbers -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label for="phone_number_1-mobile"
+                                        class="block text-sm font-medium text-gray-700">Primary Phone</label>
+                                    <input type="tel" id="phone_number_1-mobile" name="phone_number_1"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label for="phone_number_2-mobile"
+                                        class="block text-sm font-medium text-gray-700">Secondary Phone</label>
+                                    <input type="tel" id="phone_number_2-mobile" name="phone_number_2"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+
+                            <!-- Date Range -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label for="start_date-mobile" class="block text-sm font-medium text-gray-700">Start
+                                        Date</label>
+                                    <input type="date" id="start_date-mobile" name="start_date"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label for="end_date-mobile" class="block text-sm font-medium text-gray-700">End
+                                        Date</label>
+                                    <input type="date" id="end_date-mobile" name="end_date"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="pt-4">
+                                <button type="submit"
+                                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    Submit Lease Request
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Checkout Page: Initially hidden and toggled by the button above -->
-<div id="checkoutPage" class="bg-gray-50 min-h-screen hidden">
-    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Lease Configuration -->
-            <div class="md:col-span-2 space-y-6">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-xl font-semibold mb-4">Lease Configuration</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-gray-700 mb-2">Lease Term</label>
-                            <select class="w-full border rounded-md p-2">
-                                <option>24 Months</option>
-                                <option>36 Months</option>
-                                <option>48 Months</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2">Annual Mileage</label>
-                            <select class="w-full border rounded-md p-2">
-                                <option>10,000 miles</option>
-                                <option>12,000 miles</option>
-                                <option>15,000 miles</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Personal Information -->
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-xl font-semibold mb-4">Personal Information</h2>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-700 mb-2">First Name</label>
-                            <input type="text" class="w-full border rounded-md p-2" />
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2">Last Name</label>
-                            <input type="text" class="w-full border rounded-md p-2" />
-                        </div>
-                        <div class="col-span-2">
-                            <label class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" class="w-full border rounded-md p-2" />
-                        </div>
-                        <div class="col-span-2">
-                            <label class="block text-gray-700 mb-2">Phone</label>
-                            <input type="tel" class="w-full border rounded-md p-2" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Order Summary -->
-            <div class="bg-white p-6 rounded-lg shadow h-fit sticky top-24">
-                <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Base Lease</span>
-                        <span>$499/month</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Insurance</span>
-                        <span>$89/month</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Maintenance</span>
-                        <span>$45/month</span>
-                    </div>
-                    <div class="border-t pt-4">
-                        <div class="flex justify-between font-semibold">
-                            <span>Total Monthly Payment</span>
-                            <span>$633/month</span>
-                        </div>
-                    </div>
-                    <button class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700">
-                        Complete Lease Application
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div >
 {% endblock %}
